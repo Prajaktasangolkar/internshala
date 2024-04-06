@@ -1,21 +1,16 @@
-// routes/gameRoutes.js
-
-const express = require('express');
+import express from "express";
+import { getRandomNumber } from "../utils.js";
 const router = express.Router();
-const {getRandomNumber} = require("../utils.js");
 
 // Dummy data for shapes (replace this with your actual data source)
 
+const shapes = ["square", "circle", "triangle"];
+const colors = ["red", "blue", "yellow"];
 
-const shapes = ["square","circle","triangle"];
-const colors = ["red","blue","yellow"];
-
-router.get('/shapes', (req, res) => {
+router.get("/shapes", (req, res) => {
   const minShapes = 5;
   const maxShapes = 15;
-  const shapesData = [
-
-  ];
+  const shapesData = [];
 
   const shapesToAdd = getRandomNumber(minShapes, maxShapes);
 
@@ -27,7 +22,7 @@ router.get('/shapes', (req, res) => {
       const newShape = {
         id: shapesData.length + 1,
         type: shapes[shapeIndex],
-        color: colors[colorIndex]
+        color: colors[colorIndex],
       };
       shapesData.push(newShape);
     }
@@ -43,4 +38,4 @@ router.get('/shapes', (req, res) => {
   // res.json(shapesData);
 });
 
-module.exports = router;
+export default router;

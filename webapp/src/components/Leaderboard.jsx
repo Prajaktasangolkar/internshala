@@ -1,7 +1,7 @@
 // components/LeaderboardTab.js
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function LeaderboardTab() {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -11,20 +11,22 @@ function LeaderboardTab() {
     // Fetch leaderboard data initially and subscribe to WebSocket for real-time updates
     const fetchLeaderboardData = async () => {
       try {
-        const response = await axios.get(`/api/leaderboard?timeWindow=${timeWindow}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/leaderboard?interval=${timeWindow}`
+        );
         setLeaderboard(response.data);
 
         // WebSocket connection for real-time updates
-        const ws = new WebSocket('ws://localhost:8000'); // WebSocket server address
+        const ws = new WebSocket("ws://localhost:8000"); // WebSocket server address
         ws.onopen = () => {
-          console.log('WebSocket connected');
+          console.log("WebSocket connected");
         };
         ws.onmessage = (event) => {
           const updatedLeaderboard = JSON.parse(event.data);
           setLeaderboard(updatedLeaderboard);
         };
         ws.onclose = () => {
-          console.log('WebSocket closed');
+          console.log("WebSocket closed");
         };
 
         // Cleanup WebSocket connection on component unmount
@@ -32,7 +34,7 @@ function LeaderboardTab() {
           ws.close();
         };
       } catch (error) {
-        console.error('Error fetching leaderboard data:', error);
+        console.error("Error fetching leaderboard data:", error);
       }
     };
 
@@ -64,7 +66,7 @@ function LeaderboardTab() {
           {leaderboard.map((user, index) => (
             <tr key={index}>
               <td>{user.username}</td>
-              <td>{user.blueTrianglesClicked}</td>
+              <td>{user.points}</td>
             </tr>
           ))}
         </tbody>
