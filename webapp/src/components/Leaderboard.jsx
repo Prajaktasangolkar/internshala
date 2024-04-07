@@ -1,9 +1,11 @@
 // components/LeaderboardTab.js
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import axios from "axios";    
+import Navbar, {navbar} from './Navbar'
 function LeaderboardTab() {
+  
+  
   const [leaderboard, setLeaderboard] = useState([]);
   const [timeWindow, setTimeWindow] = useState(5); // Default time window of 5 minutes
 
@@ -47,6 +49,7 @@ function LeaderboardTab() {
 
   return (
     <div>
+      <Navbar/>
       <h1>Leaderboard Tab</h1>
       <div>
         <h2>Leaderboard for Past {timeWindow} Minutes</h2>

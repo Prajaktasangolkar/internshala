@@ -1,7 +1,10 @@
+// Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-function Register({ onRegister }) {
+
+function Register({ onRegister, navigate }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,8 +16,9 @@ function Register({ onRegister }) {
     try {
       const response = await axios.post('http://localhost:5000/api/auth/register', { username, password });
       const token = response.data.token;
-      localStorage.setItem('token', token); // Store token in localStorage
-      onRegister(); // Callback to inform parent component (e.g., App) about successful registration
+      localStorage.setItem('token', token);
+      onRegister();
+      navigate('/login');
     } catch (error) {
       setError('Failed to register. Please try again.');
     }
@@ -35,6 +39,7 @@ function Register({ onRegister }) {
         <button type="submit">Register</button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
+      <p>Already registered? <Link to="/">Login here</Link>.</p>
     </div>
   );
 }

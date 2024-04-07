@@ -21,6 +21,7 @@ function Login({ onLogin }) {
       const token = response.data.token;
       localStorage.setItem("token", token); // Store token in localStorage
       onLogin(); // Callback to inform parent component (e.g., App) about successful login
+      
     } catch (error) {
       setError("Invalid username or password");
       if (error.response && error.response.status === 401) {
