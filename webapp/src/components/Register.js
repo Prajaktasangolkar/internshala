@@ -1,26 +1,29 @@
 // Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 
-function Register({ onRegister, navigate }) {
+function Register({ navigate }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+const navigation=useNavigate();
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError('');
-
+    
     try {
+      setError('');
+      console.log(error)
       const response = await axios.post('http://localhost:5000/api/auth/register', { username, password });
-      const token = response.data.token;
+      const token = response.data;
+      console.log(token,'token');
       localStorage.setItem('token', token);
-      onRegister();
-      navigate('/login');
-    } catch (error) {
-      setError('Failed to register. Please try again.');
+       console.log(error)
+       navigation('/')
+      // navigate('/login');
+    } catch (error) {   console.log(error)
+      setError('Failed to register. Please try again.',error);   console.log(error)
     }
   };
 
@@ -39,7 +42,7 @@ function Register({ onRegister, navigate }) {
         <button type="submit">Register</button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
-      <p>Already registered? <Link to="/">Login here</Link>.</p>
+      <p >Already registered? <Link to="/" style={{color:'red'}}>Login here</Link>.</p>
     </div>
   );
 }

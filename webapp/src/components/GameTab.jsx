@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Confetti from "react-confetti";
 import beepSound from "../assests/beep.mp3";
+import Navbar from "./Navbar";
 
 const triangle = (color) => {
   return {
@@ -61,6 +62,7 @@ function GameTab() {
 
   return (
     <div>
+      <Navbar/>
       <h1>Game Tab</h1>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {shapes.map((shape) => (

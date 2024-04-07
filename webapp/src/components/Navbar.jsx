@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './navbar.css'
 
-function Navbar({ isLoggedIn }) {
+function Navbar() {
   return (
     <nav>
       <ul>
           <>
           <li>
-          <Link to="/">GameTab</Link>
+          <Link to="/game">GameTab</Link>
         </li>
             <li>
               <Link to="/leaderboard">LeaderboardTab</Link>
