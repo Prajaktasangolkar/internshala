@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Confetti from "react-confetti";
-import beepSound from "../assests/beep.mp3";
-import Navbar from "./Navbar";
+import beepSound from "../../assests/beep.mp3";
+import Navbar from "../Navbar/Navbar";
+import "./gametab.css";
+
 
 const triangle = (color) => {
   return {
@@ -25,6 +27,7 @@ function GameTab() {
         const response = await axios.get(
           "http://127.0.0.1:5000/api/game/shapes"
         ); // Use relative URL
+       
         setShapes(response.data);
       } catch (error) {
         console.error("Error fetching shapes data:", error);
@@ -61,32 +64,44 @@ function GameTab() {
   };
 
   return (
-    <div>
-      <Navbar/>
-      <h1>Game Tab</h1>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {shapes.map((shape) => (
-          <div
-            key={shape.id}
-            style={
-              shape.type == "triangle"
-                ? triangle(shape.color)
-                : {
-                    width: "50px",
-                    height: "50px",
-                    margin: "10px",
-                    backgroundColor: shape.color,
-                    borderRadius: shape.type === "circle" ? "50%" : "0%",
-                    cursor: "pointer",
-                  }
-            }
-            onClick={() => handleShapeClick(shape.id, shape.color, shape.type)}
-          ></div>
-        ))}
-      </div>
-      {confettiActive && <Confetti />}
+    <div className="game-container">
+    <Navbar />
+    
+    <h1 style={{'display':'flex','justify-content':'center'}}>Game Tab</h1>
+    <p>Rules:</p>
+    <ul style={{ listStyleType: "disc" , 'display':'flex','flex-direction':'column'}}>
+      <li>
+        Click on blue triangles to earn 10 points and see confetti burst.
+      </li>
+      <li>
+        Click on any shape other than blue triangles to hear a beep sound.
+      </li>
+    </ul>
+
+    <div className="play-area" style={{ display: "flex" ,'margin':'40px 10px 40px 10px'}}>
+      {shapes.map((shape) => (
+           <div
+           key={shape.id}
+           style={
+             shape.type == "triangle"
+               ? triangle(shape.color)
+               : {
+                   width: "50px",
+                   height: "50px",
+                   margin: "10px",
+                   backgroundColor: shape.color,
+                   borderRadius: shape.type === "circle" ? "50%" : "0%",
+                   cursor: "pointer",
+                 }
+           }
+           onClick={() => handleShapeClick(shape.id, shape.color, shape.type)}
+         ></div>
+      ))}
     </div>
+    {confettiActive && <Confetti />}
+  </div>
   );
 }
 
 export default GameTab;
+

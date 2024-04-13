@@ -32,6 +32,8 @@ router.get("/shapes", (req, res) => {
   }
 
   // Return the updated shapes data as JSON
+  // res.set("Access-Control-Allow-Origin","*")
+
   res.json(shapesData);
 
   // Return the shapes data as JSON

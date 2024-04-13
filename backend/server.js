@@ -1,7 +1,7 @@
 // const express = require('express');
 import express from "express";
 import cookieparser from "cookie-parser";
-import WebSocket, { WebSocketServer } from "ws";
+
 
 import pool from "./db.js";
 import cors from "cors";
@@ -36,22 +36,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/game", gameRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
 
-// WebSocket server for real-time updates
-const wss = new WebSocketServer({ port: 8000 });
 
-wss.on("connection", (ws) => {
-  console.log("WebSocket client connected");
-
-  // Handle WebSocket messages
-  ws.on("message", (message) => {
-    console.log(`Received message: ${message}`);
-  });
-
-  // Close WebSocket connection
-  ws.on("close", () => {
-    console.log("WebSocket client disconnected");
-  });
-});
 
 app.use((err, req, res, next) => {
   console.log(err);

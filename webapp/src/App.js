@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import axios from "axios";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import GameTab from "./components/GameTab";
-import LeaderboardTab from "./components/Leaderboard";
-import Navbar from "./components/Navbar";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import GameTab from "./components/Gametab/GameTab";
+import LeaderboardTab from "./components/Leaderboard/Leaderboard";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

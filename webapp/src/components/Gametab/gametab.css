@@ -1,0 +1,33 @@
+/* GameTab.css */
+
+.game-container {
+    padding: 20px;
+    color: aliceblue;
+  }
+  
+  .shape {
+    cursor: pointer;
+    margin: 7px;
+  }
+  
+  .square {
+    width: 50px;
+    height: 50px;
+    background-color: #ff6347; /* red */
+  }
+  
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: #ffd700; /* yellow */
+    border-radius: 50%;
+  }
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #1e90ff; /* blue */
+  }
+  

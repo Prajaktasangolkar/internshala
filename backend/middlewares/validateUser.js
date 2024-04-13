@@ -6,7 +6,7 @@ export const validateUser = (req, res, next) => {
     const decoded = jwt.verify(token, "secret");
     if (decoded) {
       req.user = decoded;
-      next();
+      next(); //function 
     }
   } catch (error) {
     throw new Error("Invalid Token");
